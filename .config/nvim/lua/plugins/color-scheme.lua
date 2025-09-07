@@ -44,6 +44,10 @@ return {
       -- setup plugin
       require("catppuccin").setup(opts)
 
+      -- alias for LazyVim compatibility with bufferline
+      local bufferline_int = require("catppuccin.groups.integrations.bufferline")
+      bufferline_int.get = bufferline_int.get_theme
+
       -- safely apply colorscheme
       local ok, _ = pcall(vim.cmd, "colorscheme catppuccin")
       if not ok then
