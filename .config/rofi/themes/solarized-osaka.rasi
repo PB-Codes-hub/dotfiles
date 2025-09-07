@@ -1,5 +1,5 @@
 /**
- * Rofi Theme File with Catppuccin Mocha Palette
+ * Rofi Theme File with Solarized Osaka Palette
  **/
 
 /*****----- Configuration -----*****/
@@ -14,38 +14,38 @@ configuration {
 	window-format:              "{w} · {c} · {t}";
 }
 
-/*****----- Color Palette (Catppuccin Mocha) -----*****/
+/*****----- Color Palette (Solarized Osaka) -----*****/
 * {
-    text-color:                  #cdd6f4;
-    background-color:            #1e1e2e;
-    lightbg:                     #1e1e2e;
-    red:                         #f38ba8;
-    orange:                      #fab387;
-    blue:                        #89b4fa;
-    black-foreground:            #1e1e2e;
-    gold:                        #f9e2af;
+    text-color:                  #d0d7df;
+    background-color:            #0a1a1f;
+    lightbg:                     #0a1a1f;
+    red:                         #c0392b;
+    orange:                      #fdd835;
+    blue:                        #2176c7;
+    black-foreground:            #0a1a1f;
+    gold:                        #b58900;
 
-    selected-normal-foreground:  #1e1e2e;
-    normal-foreground:           #cdd6f4;
-    alternate-normal-background: #1e1e2e;
-    selected-urgent-foreground:  #1e1e2e;
-    urgent-foreground:           #1e1e2e;
-    alternate-urgent-background: #1e1e2e;
-    active-foreground:           #cdd6f4;
-    selected-active-foreground:  #cdd6f4;
-    alternate-normal-foreground: #cdd6f4;
-    alternate-active-background: #89b4fa;
-    borderColor:                 #cba6f7;
-    normal-background:           #1e1e2e;
-    selected-normal-background:  #89b4fa;
-    separatorcolor:              #f9e2af;
+    selected-normal-foreground:  #0a1a1f;
+    normal-foreground:           #d0d7df;
+    alternate-normal-background: #0a1a1f;
+    selected-urgent-foreground:  #0a1a1f;
+    urgent-foreground:           #0a1a1f;
+    alternate-urgent-background: #0a1a1f;
+    active-foreground:           #d0d7df;
+    selected-active-foreground:  #d0d7df;
+    alternate-normal-foreground: #d0d7df;
+    alternate-active-background: #2176c7;
+    borderColor:                 #b58900;
+    normal-background:           #0a1a1f;
+    selected-normal-background:  #2176c7;
+    separatorcolor:              #fdd835;
     spacing:                     2;
-    urgent-background:           #f38ba8;
-    alternate-urgent-foreground: #cdd6f4;
-    selected-urgent-background:  #f38ba8;
-    alternate-active-foreground: #cdd6f4;
-    selected-active-background:  #89b4fa;
-    active-background:           #fab387;
+    urgent-background:           #c0392b;
+    alternate-urgent-foreground: #d0d7df;
+    selected-urgent-background:  #c0392b;
+    alternate-active-foreground: #d0d7df;
+    selected-active-background:  #2176c7;
+    active-background:           #fdd835;
     font: "JetBrains Mono Nerd Font 14";
 }
 
@@ -157,15 +157,19 @@ element {
     cursor:                      pointer;
 }
 element selected.normal {
+  background-color: @selected-normal-bakground;
   text-color: @orange;
 }
 element selected.urgent {
+  background-color: @urgent-background;
   text-color: @selected-urgent-foreground;
 }
 element selected.active {
+  background-color: @active-background;
   text-color: @selected-active-foreground;
 }
 element alternate.active {
+  background-color: @alternate-active-background;
   text-color: @alternate-active-foreground;
 }
 element-icon {

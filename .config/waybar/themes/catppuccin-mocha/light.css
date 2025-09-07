@@ -1,0 +1,11 @@
+/* ------------------------*/
+/* Catppuccin Mocha - Light */
+/* ------------------------*/
+
+@define-color bg_main   #ffffff; /* Neutral white for clarity */
+@define-color text_main #1e1e2e; /* Mocha text, strong contrast */
+@define-color accent    #b99de9; /* Softened Mocha Mauve (#cba6f7 toned down) */
+
+@define-color battery_critical #f38ba8; /* Mocha red */
+@define-color battery_charging #a6e3a1; /* Mocha green */
+@define-color overlay rgba(0,0,0,0.08); /* Gentle shadow */

@@ -40,4 +40,3 @@ vim.opt.mouse = ""
 vim.opt.formatoptions:append({ "r" })
 vim.o.termguicolors = true
 vim.opt.guicursor = ""
-vim.cmd([[colorscheme solarized-osaka]])

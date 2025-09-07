@@ -1,3 +1,9 @@
+/* -----------------------------------------------------
+ * Import
+ * ----------------------------------------------------- */
+
+@import "./colors.css";
+
 * {
   all: unset;
   background-image: none;
@@ -28,8 +34,8 @@ button {
 
 button:hover,
 button:focus {
-  background-color: #063642;
-  border: #b58900 5px solid;
+  background-color: @bg-color;
+  border: @border-color 5px solid;
 }
 
 button:focus {
@@ -37,8 +43,8 @@ button:focus {
 }
 
 button:active {
-  background-color: #063642;
-  border: #b58900 5px solid;
+  background-color: @bg-color;
+  border: @border-color 5px solid;
 }
 
 #lock {
