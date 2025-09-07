@@ -57,7 +57,7 @@ fi
 ### Waybar
 WAYBAR_THEME=$(jq -r '.["waybar-theme"]' "$SETTINGS")
 WAYBAR_SRC_DIR="$HOME/.config/waybar/themes/$THEME"
-WAYBAR_DEST="$HOME/.config/waybar/current-colors.css"
+WAYBAR_DEST="$HOME/.config/waybar/colors.css"
 
 if [ -d "$WAYBAR_SRC_DIR" ]; then
   WAYBAR_FILE="$WAYBAR_SRC_DIR/$WAYBAR_THEME.css"

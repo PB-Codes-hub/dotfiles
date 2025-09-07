@@ -87,8 +87,9 @@ inputbar {
     spacing:                     0px;
     margin:                      8px 8px 8px 16px;
     padding:                     0px;
-    border:                      0px 0px 1px 0px;
-    background-color:            @blue;
+    border:                      0px 0px 2px 0px;
+
+    border-color:                @blue;
     text-color:                  @normal-foreground;
     border-radius:               10px;
     children:                    [ "entry" ];

@@ -4,7 +4,7 @@ SETTINGS="$HOME/dotfiles/global/settings.json"
 THEME=$(jq -r '.theme' "$SETTINGS")
 
 THEME_DIR="$HOME/.config/waybar/themes/$THEME"
-TARGET="$HOME/.config/waybar/current-colors.css"
+TARGET="$HOME/.config/waybar/colors.css"
 ICON="   " # Nerd Font paint palette
 
 # Function to set config value

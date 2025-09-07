@@ -24,6 +24,7 @@ configuration {
     blue:                        #89b4fa;
     black-foreground:            #1e1e2e;
     gold:                        #f9e2af;
+    base:                        #cba6f7;
 
     normal-background:           #1e1e2e;   /* Base */
     normal-foreground:           #cdd6f4;   /* Text */
@@ -58,7 +59,7 @@ window {
     margin:                      0px;
     padding:                     0px;
     border:                      2px solid;
-    border-color:                @borderColor;
+    border-color:                @blue;
     border-radius:               10px;
     cursor:                      "default";
 }
@@ -78,9 +79,10 @@ inputbar {
     enabled:                     true;
     margin:                      8px 12px;
     padding:                     6px;
-    border:                      1px solid;
-    border-color:                @borderColor;
-    background-color:            @lightbg;
+
+    border:                      0px 0px 2px 0px;
+    border-color:                @blue;
+    background-color:            @selected-normal-foreground;
     text-color:                  @normal-foreground;
     border-radius:               8px;
     children:                    [ "entry" ];
@@ -131,15 +133,12 @@ element {
     cursor:                      pointer;
 }
 element selected.normal {
-    background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
+    text-color:       @base;
 }
 element normal.active {
-    background-color: @active-background;
     text-color:       @active-foreground;
 }
 element normal.urgent {
-    background-color: @urgent-background;
     text-color:       @urgent-foreground;
 }
 
