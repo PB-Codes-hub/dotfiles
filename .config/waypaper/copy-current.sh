@@ -20,9 +20,22 @@ mkdir -p "$HOME/dotfiles/global"
 # Convert to PNG if not already PNG
 EXT="${WALLPAPER##*.}"
 if [ "$EXT" != "png" ]; then
-  convert "$WALLPAPER" "$DEST"
+  magick convert "$WALLPAPER" "$DEST"
 else
   cp "$WALLPAPER" "$DEST"
+fi
+
+# Change colors if the theme is matugen
+SETTINGS="$HOME/dotfiles/global/settings.json"
+
+# Read theme from JSON
+THEME=$(jq -r '.theme' "$SETTINGS")
+
+if [ "$THEME" == "matugen" ]; then
+  echo ":: Execute matugen with $HOME/dotfiles/global/current_wallpaper.png"
+
+  # Call theme-switcher (matugen will be reloaded there)
+  "$HOME/dotfiles/global/scripts/theme-switcher.sh"
 fi
 
 # Verify copy

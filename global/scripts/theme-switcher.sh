@@ -10,6 +10,12 @@ THEME=$(jq -r '.theme' "$SETTINGS")
 
 echo ">> Switching to theme: $THEME"
 
+# Confirm current theme
+if [ "$THEME" == "matugen" ]; then
+  echo ":: Execute matugen with $HOME/dotfiles/global/current_wallpaper.png"
+  $HOME/.cargo/bin/matugen image $HOME/dotfiles/global/current_wallpaper.png
+fi
+
 ### Hyprland
 HYPR_SRC="$HOME/dotfiles/global/hypr-general/${THEME}.conf"
 HYPR_DEST="$HOME/.config/hypr/conf/deco-general.conf"

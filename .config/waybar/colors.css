@@ -1,10 +1,12 @@
 /* ------------------------*/
-/* Gruvbox Dark            */
+/* Matugen Generated - Dark */
 /* ------------------------*/
 
-@define-color bg_main #282828;
-@define-color text_main #ebdbb2;
-@define-color accent #d79921; /* yellow accent */
-@define-color battery_critical #cc241d; /* red */
-@define-color battery_charging #98971a; /* green */
+/* Core colors from Matugen JSON */
+@define-color bg_main #101510;          /* Background */
+@define-color text_main #dfe4dc;    /* Main text */
+@define-color accent #99d4a3;          /* Accent / highlight */
+
+@define-color battery_critical #ffb595;
+@define-color battery_charging #9fd49c;
 @define-color overlay rgba(255,255,255,0.1);

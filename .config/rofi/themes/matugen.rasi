@@ -1,0 +1,220 @@
+/**
+ * Matugen Theme 
+ **/
+
+/*****----- Configuration -----*****/
+configuration {
+	modi:                       "drun,run,window";
+    show-icons:                 true;
+    icon-theme:                 "Papirus";
+    display-drun:               "drun";
+    display-run:                "run";
+    display-window:             "window";
+	drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+	window-format:              "{w} · {c} · {t}";
+}
+
+/*****----- Color Palette -----*****/
+* {
+    text-color:                  #dfe4dc;
+    background-color:            #101510;
+    lightbg:                     #181d18;
+
+    red:                         #ffb595;
+    green:                       #9fd49c;
+    blue:                        #afc6ff;
+    orange:                      #e9c16c;
+    gold:                        #cbcb77;
+
+    black-foreground:            #0b0f0b;
+
+    selected-normal-foreground:  #101510;
+    normal-foreground:           #dfe4dc;
+    alternate-normal-background: #101510;
+    selected-urgent-foreground:  #101510;
+    urgent-foreground:           #690005;
+    alternate-urgent-background: #353a35;
+    active-foreground:           #003919;
+    selected-active-foreground:  #233426;
+    alternate-normal-foreground: #c1c9bf;
+    alternate-active-background: #394b3b;
+    borderColor:                 #cbcb77;
+    normal-background:           #101510;
+    selected-normal-background:  #99d4a3;
+    separatorcolor:              #e9c16c;
+    spacing:                     2;
+    urgent-background:           #ffb595;
+    alternate-urgent-foreground: #ffdad6;
+    selected-urgent-background:  #93000a;
+    alternate-active-foreground: #d3e8d2;
+    selected-active-background:  #b7ccb7;
+    active-background:           #e9c16c;
+    font: "JetBrains Mono Nerd Font 14";
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       600px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+    opacity:                     0.5;
+    background-color:            @background-color;
+
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      2px solid;
+    border-color:                @blue;
+    border-radius:               10px;
+    cursor:                      "default";
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    children:                    [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      8px 8px 8px 16px;
+    padding:                     0px;
+    border:                      0px 0px 2px 0px;
+
+    border-color:                @blue;
+    text-color:                  @normal-foreground;
+    border-radius:               10px;
+    children:                    [ "entry" ];
+}
+
+prompt {
+    enabled:                     true;
+    padding:                     15px;
+    border:                      0px 1px 0px 0px;
+    border-color:                @normal-foreground;
+    background-color:            @normal-foreground;
+    text-color:                  @black-foreground;
+    border-radius:               5px;
+}
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "::";
+    background-color:            inherit;
+    text-color:                  @normal-foreground;
+}
+entry {
+    enabled:                     true;
+    padding:                     15px;
+    background-color:            inherit;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "";
+    placeholder-color:           inherit;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       6;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     20px;
+    border:                      0px;
+    border-radius:               0px;
+    background-color:            @background-color;
+    text-color:                  @normal-foreground;
+}
+scrollbar {
+    handle-width:                5px ;
+    handle-color:                @blue;
+    border-radius:               0px;
+    background-color:            @normal-foreground;
+}
+
+/*****----- Elements -----*****/
+element {
+    spacing:                     10px;
+    padding:                     3px 5px;
+    border-radius:               10px;
+    background-color:            transparent;
+    text-color:                  @normal-foreground;
+    cursor:                      pointer;
+}
+element selected.normal {
+  background-color: @selected-normal-bakground;
+  text-color: @orange;
+}
+element selected.urgent {
+  background-color: @urgent-background;
+  text-color: @selected-urgent-foreground;
+}
+element selected.active {
+  background-color: @active-background;
+  text-color: @selected-active-foreground;
+}
+element alternate.active {
+  background-color: @alternate-active-background;
+  text-color: @alternate-active-foreground;
+}
+element-icon {
+    size:                        38px;
+    text-color:                  inherit;
+}
+element-text {
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+/*****----- Mode Switcher -----*****/
+mode-switcher{
+    enabled:                     false;
+    spacing:                     10px;
+    text-color:                  @normal-foreground;
+}
+button {
+    padding:                     10px;
+    background-color:            @background-color;
+    text-color:                  @orange;
+    cursor:                      pointer;
+}
+
+/*****----- Message -----*****/
+message {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  @orange;
+}
+textbox {
+    padding:                     10px;
+    background-color:            transparent;
+    text-color:                  @normal-foreground;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    blink:                       true;
+    markup:                      true;
+}
+error-message {
+    background-color:            @background-color;
+    text-color:                  @red;
+}

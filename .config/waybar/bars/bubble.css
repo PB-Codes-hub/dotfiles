@@ -47,7 +47,6 @@ window#waybar {
 }
 
 #workspaces button.active {
-  padding: 0 12px;
   background: @accent;
   opacity: 1;
   transition: all 0.3s ease-in-out;
