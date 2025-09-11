@@ -1,95 +1,132 @@
--- matugen
+-- Catppuccin Theme with Matugen Palette Integration
+local status, palette = pcall(require, "themes.utils.matugen-palette")
+if not status then
+  vim.notify("Error loading matugen-palette: " .. palette, vim.log.levels.ERROR)
+  return {}
+end
+
 return {
   {
-    "rktjmp/lush.nvim",
+    "catppuccin/nvim",
+    name = "catppuccin",
     lazy = false,
     priority = 1000,
-    config = function()
-      local lush = require("lush")
-      local hsl = lush.hsl
+    opts = {
+      flavour = "mocha",
+      background = { light = "latte", dark = "mocha" },
+      transparent_background = true, -- Keep main editor transparent
+      show_end_of_buffer = false,
+      term_colors = false,
+      dim_inactive = { enabled = false },
+      no_italic = false,
+      no_bold = false,
+      no_underline = false,
+      styles = {
+        comments = { "italic" },
+        conditionals = { "italic" },
+        loops = {},
+        functions = {},
+        keywords = {},
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = {},
+        operators = {},
+      },
 
-      -- Load matugen palette (raw hex strings)
-      local palette = require("themes.utils.matugen-palette")
+      -- Map matugen colors to Catppuccin's palette
+      color_overrides = {
+        mocha = {
+          -- Base colors
+          base = palette.bg,
+          mantle = palette.cursorln,
+          crust = palette.cursorln,
 
-      -- Convert hex to hsl objects for lush operations
-      local colors = {
-        fg = hsl(palette.fg),
-        bg = hsl(palette.bg),
-        accent = hsl(palette.accent),
-        comment = hsl(palette.comment),
-        string = hsl(palette.string),
-        keyword = hsl(palette.keyword),
-        visual = hsl(palette.visual).da(40),
-        cursorln = hsl(palette.cursorln).da(30),
-      }
+          -- Text colors
+          text = palette.fg,
+          subtext0 = palette.comment,
+          subtext1 = palette.fg,
 
-      -- Define the theme
-      local theme = lush(function()
+          -- Primary colors (where the theme shines)
+          rosewater = palette.primary, -- Main highlights
+          flamingo = palette.accent, -- UI accents
+          pink = palette.primary, -- Alternative highlight
+          mauve = palette.keyword, -- Keywords
+
+          -- Status colors
+          red = palette.error, -- Errors
+          maroon = palette.error, -- Alternative error
+          peach = palette.warning, -- Warnings
+          orange = palette.warning, -- Alternative warning
+          yellow = palette.info, -- Info
+          green = palette.git_add, -- Success
+          teal = palette.info, -- Alternative info
+          sky = palette.info, -- Alternative info
+          blue = palette.info, -- Alternative info
+          lavender = palette.accent, -- UI elements
+
+          -- Syntax colors
+          sapphire = palette.type, -- Types
+
+          -- Surface colors
+          surface0 = palette.cursorln,
+          surface1 = palette.comment,
+          surface2 = palette.comment,
+
+          -- Overlay colors
+          overlay0 = palette.visual, -- Visual selection
+          overlay1 = palette.visual, -- Secondary selection
+          overlay2 = palette.comment,
+        },
+      },
+
+      integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        notify = false,
+        mini = { enabled = true },
+        bufferline = {
+          enabled = true,
+          transparent = true,
+        },
+      },
+
+      custom_highlights = function(colors)
         return {
-          -- Core editor
-          Normal({ fg = colors.fg, bg = "NONE" }),
-          Comment({ fg = colors.comment, gui = "italic" }),
-          String({ fg = colors.string }),
-          Keyword({ fg = colors.keyword, gui = "bold" }),
-          Identifier({ fg = colors.accent }),
-          Function({ fg = colors.accent, gui = "bold" }),
-          CursorLine({ bg = colors.cursorln }),
-          Visual({ bg = colors.visual }),
-          LineNr({ fg = colors.comment }),
-          CursorLineNr({ fg = colors.accent, gui = "bold" }),
-          StatusLine({ fg = colors.fg, bg = colors.cursorln }),
-          StatusLineNC({ fg = colors.comment, bg = colors.cursorln }),
+          Comment = { fg = colors.flamingo },
+          TabLineSel = { bg = colors.pink },
+          CmpBorder = { fg = colors.surface2 },
+          -- Highlight curly braces and parentheses
+          ["@punctuation.bracket"] = { fg = palette.constant, bold = true },
 
-          -- Bufferline.nvim
-          BufferLineFill({ bg = "NONE" }),
-          BufferLineBackground({ fg = colors.comment, bg = "NONE" }),
-          BufferLineBufferSelected({ fg = colors.fg, bg = colors.cursorln, gui = "bold" }),
-          BufferLineBufferVisible({ fg = colors.fg, bg = "NONE" }),
-          BufferLineSeparator({ fg = colors.cursorln, bg = "NONE" }),
-          BufferLineSeparatorSelected({ fg = colors.accent, bg = colors.cursorln }),
-          BufferLineSeparatorVisible({ fg = colors.cursorln, bg = "NONE" }),
-          BufferLineIndicatorSelected({ fg = colors.accent, bg = colors.cursorln }),
-          BufferLineModified({ fg = colors.accent }),
-          BufferLineModifiedSelected({ fg = colors.accent, gui = "bold" }),
+          -- copy code hightlight
+          Visual = { bg = palette.visual },
 
-          -- Telescope
-          TelescopePromptNormal({ fg = colors.fg, bg = colors.cursorln }),
-          TelescopePromptBorder({ fg = colors.accent, bg = colors.cursorln }),
-          TelescopeResultsNormal({ fg = colors.fg, bg = "NONE" }),
-          TelescopeResultsBorder({ fg = colors.cursorln, bg = "NONE" }),
-          TelescopePreviewNormal({ fg = colors.fg, bg = "NONE" }),
-          TelescopePreviewBorder({ fg = colors.cursorln, bg = "NONE" }),
-
-          -- NvimTree
-          NvimTreeNormal({ fg = colors.fg, bg = "NONE" }),
-          NvimTreeVertSplit({ fg = colors.cursorln, bg = "NONE" }),
-          NvimTreeEndOfBuffer({ fg = colors.comment, bg = "NONE" }),
-          NvimTreeRootFolder({ fg = colors.accent, gui = "bold" }),
+          -- Highlight code element under cursor
+          LspReferenceText = { fg = palette.fg, bg = "#3b4261", bold = true },
+          LspReferenceRead = { fg = palette.fg, bg = "#3b4261" },
+          LspReferenceWrite = { fg = palette.fg, bg = "#3b4261" },
         }
-      end)
+      end,
+    },
 
-      -- Apply theme and expose `.get_theme()` for LazyVim compatibility
-      local applied_theme = lush(theme) -- Note: If this doesn't apply highlights, replace with lush.ify(theme)
-      vim.g.colors_name = "custom_lush" -- Set this to ensure LazyVim recognizes a non-Catppuccin theme
-      applied_theme.get_theme = function()
-        return applied_theme
+    config = function(_, opts)
+      -- Setup plugin
+      require("catppuccin").setup(opts)
+
+      -- Alias for LazyVim compatibility with bufferline
+      local bufferline_int = require("catppuccin.groups.integrations.bufferline")
+      bufferline_int.get = bufferline_int.get_theme
+
+      -- Apply colorscheme safely
+      local ok, _ = pcall(vim.cmd, "colorscheme catppuccin")
+      if not ok then
+        vim.notify("Failed to load colorscheme 'catppuccin'", vim.log.levels.WARN)
       end
-      _G._LUSH_THEME = applied_theme -- optional global reference
-    end,
-  },
-  {
-    "catppuccin/nvim",
-    enabled = false,
-  },
-  {
-    "folke/tokyonight.nvim", -- Also disable TokyoNight if present as a default fallback
-    enabled = false,
-  },
-  {
-    "LazyVim/LazyVim",
-    opts = function(_, opts)
-      opts.colorscheme = function() end -- No-op with merge function for safety
-      return opts
     end,
   },
 }

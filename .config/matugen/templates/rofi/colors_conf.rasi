@@ -16,39 +16,39 @@ configuration {
 
 /*****----- Color Palette -----*****/
 * {
-    text-color:                  #e3e1e9;
-    background-color:            #121318;
-    lightbg:                     #1a1b21;
+    text-color:                  {{colors.on_surface.default.hex}};
+    background-color:            {{colors.surface.default.hex}};
+    lightbg:                     {{colors.surface_container_low.default.hex}};
 
-    red:                         #ffb2b9;
-    green:                       #95d5a7;
-    blue:                        #bbc3ff;
-    orange:                      #ffb780;
-    gold:                        #cbcb77;
+    red:                         {{colors.red.default.hex}};
+    green:                       {{colors.green.default.hex}};
+    blue:                        {{colors.blue.default.hex}};
+    orange:                      {{colors.orange.default.hex}};
+    gold:                        {{colors.gold.default.hex}};
 
-    black-foreground:            #0d0e13;
+    black-foreground:            {{colors.surface_container_lowest.default.hex}};
 
-    selected-normal-foreground:  #121318;
-    normal-foreground:           #e3e1e9;
-    alternate-normal-background: #121318;
-    selected-urgent-foreground:  #121318;
-    urgent-foreground:           #690005;
-    alternate-urgent-background: #38393f;
-    active-foreground:           #1f2d61;
-    selected-active-foreground:  #2c2f42;
-    alternate-normal-foreground: #c6c5d0;
-    alternate-active-background: #424659;
-    borderColor:                 #cbcb77;
-    normal-background:           #121318;
-    selected-normal-background:  #b7c4ff;
-    separatorcolor:              #ffb780;
+    selected-normal-foreground:  {{colors.surface.default.hex}};
+    normal-foreground:           {{colors.on_surface.default.hex}};
+    alternate-normal-background: {{colors.surface_dim.default.hex}};
+    selected-urgent-foreground:  {{colors.surface.default.hex}};
+    urgent-foreground:           {{colors.on_error.default.hex}};
+    alternate-urgent-background: {{colors.surface_bright.default.hex}};
+    active-foreground:           {{colors.on_primary.default.hex}};
+    selected-active-foreground:  {{colors.on_secondary.default.hex}};
+    alternate-normal-foreground: {{colors.on_surface_variant.default.hex}};
+    alternate-active-background: {{colors.secondary_container.default.hex}};
+    borderColor:                 {{colors.gold.default.hex}};
+    normal-background:           {{colors.surface.default.hex}};
+    selected-normal-background:  {{colors.primary.default.hex}};
+    separatorcolor:              {{colors.orange.default.hex}};
     spacing:                     2;
-    urgent-background:           #ffb2b9;
-    alternate-urgent-foreground: #ffdad6;
-    selected-urgent-background:  #93000a;
-    alternate-active-foreground: #dee1f9;
-    selected-active-background:  #c2c5dd;
-    active-background:           #ffb780;
+    urgent-background:           {{colors.red.default.hex}};
+    alternate-urgent-foreground: {{colors.on_error_container.default.hex}};
+    selected-urgent-background:  {{colors.error_container.default.hex}};
+    alternate-active-foreground: {{colors.on_secondary_container.default.hex}};
+    selected-active-background:  {{colors.secondary.default.hex}};
+    active-background:           {{colors.orange.default.hex}};
     font: "JetBrains Mono Nerd Font 14";
 }
 
