@@ -50,6 +50,7 @@ return {
       -- safely apply colorscheme
       local ok, _ = pcall(vim.cmd, "colorscheme catppuccin")
       if not ok then
+        vim.o.termguicolors = true
         vim.notify("Failed to load colorscheme 'catppuccin'", vim.log.levels.WARN)
       end
     end,

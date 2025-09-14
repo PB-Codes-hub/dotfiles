@@ -15,6 +15,8 @@ return {
         -- },
       })
       vim.o.background = "dark" -- Ensure dark mode
+
+      vim.o.termguicolors = true
       vim.cmd([[colorscheme gruvbox]]) -- Apply colorscheme after setup
     end,
   },

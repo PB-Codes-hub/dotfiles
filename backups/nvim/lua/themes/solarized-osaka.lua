@@ -11,6 +11,8 @@ return {
     },
     config = function(_, opts)
       require("solarized-osaka").setup(opts)
+
+      vim.o.termguicolors = true
       vim.cmd([[colorscheme solarized-osaka]])
     end,
   },

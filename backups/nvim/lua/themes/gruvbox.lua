@@ -20,4 +20,12 @@ return {
       vim.cmd([[colorscheme gruvbox]]) -- Apply colorscheme after setup
     end,
   },
+
+  -- Configure LazyVim to use Gruvbox as the default colorscheme
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "gruvbox",
+    },
+  },
 }

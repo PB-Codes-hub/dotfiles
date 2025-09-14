@@ -63,8 +63,8 @@
 
   "network": {
     "interval": 1,
-    "format-wifi": "\uf019 {bandwidthDownBytes}  \uf093 {bandwidthUpBytes}",
-    "format-ethernet": "\uf019 {bandwidthDownBytes}  \uf093 {bandwidthUpBytes}",
+    "format-wifi": "\uf1eb  \uf019 {bandwidthDownBytes}  \uf093 {bandwidthUpBytes}",
+    "format-ethernet": "\uf6ff  \uf019 {bandwidthDownBytes}  \uf093 {bandwidthUpBytes}",
     "format-disconnected": "\uf00d Disconnected",
     "tooltip-format": "{ifname}: {ipaddr}/{cidr} {bandwidthDownBits}bps\uf019/{bandwidthUpBits}bps\uf093",
     "on-click": "~/dotfiles/global/scripts/network.sh",

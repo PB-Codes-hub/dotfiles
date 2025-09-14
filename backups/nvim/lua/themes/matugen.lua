@@ -11,6 +11,7 @@ return {
     name = "catppuccin",
     lazy = false,
     priority = 1000,
+    dependencies = { "folke/noice.nvim" }, -- Ensure Noice is loaded
     opts = {
       flavour = "mocha",
       background = { light = "latte", dark = "mocha" },
@@ -110,6 +111,37 @@ return {
           LspReferenceText = { fg = palette.fg, bg = "#3b4261", bold = true },
           LspReferenceRead = { fg = palette.fg, bg = "#3b4261" },
           LspReferenceWrite = { fg = palette.fg, bg = "#3b4261" },
+
+          -- More detailed nvim-cmp highlights
+          CmpItemMenu = { fg = palette.comment },
+          CmpItemAbbrMatch = { fg = palette.primary, bold = true },
+          CmpItemAbbrMatchFuzzy = { fg = palette.accent },
+          -- Noice.nvim specific highlights
+          NoicePopupNormal = {
+            bg = palette.cursorln,
+            fg = palette.fg,
+          },
+          NoicePopupBorder = {
+            fg = palette.comment,
+          },
+          NoicePopupSelected = {
+            bg = palette.visual,
+            fg = palette.fg,
+            bold = true,
+          },
+          -- LSP completion popup selected item (PmenuSel) - fixes white-on-white visibility
+          PmenuSel = {
+            fg = colors.text,
+            bg = colors.overlay0,
+            bold = true,
+          },
+
+          CursorLine = { bg = palette.hint, fg = palette.fg, bold = true },
+          NoicePopupSelected = {
+            bg = palette.visual,
+            fg = palette.fg,
+            bold = true,
+          },
         }
       end,
     },
@@ -118,15 +150,34 @@ return {
       -- Setup plugin
       require("catppuccin").setup(opts)
 
+      -- Additional configuration for Noice
+      require("noice").setup({
+        views = {
+          popup = {
+            border = {
+              style = "rounded",
+            },
+            win_options = {
+              winhighlight = "Normal:NoicePopupNormal,FloatBorder:NoicePopupBorder,CursorLine:NoicePopupSelected",
+            },
+          },
+        },
+      })
+
       -- Alias for LazyVim compatibility with bufferline
       local bufferline_int = require("catppuccin.groups.integrations.bufferline")
       bufferline_int.get = bufferline_int.get_theme
 
+      vim.g.lazyvim_disable_colorscheme = true
+      vim.g.lazyvim_disable_colorscheme = true
+
+      vim.o.termguicolors = true
+      vim.o.background = "dark" -- Ensure dark mode
+      vim.api.nvim_set_hl(0, "Pmenu", { fg = palette.bg, bg = palette.cursorln })
+
       -- Apply colorscheme safely
-      local ok, _ = pcall(vim.cmd, "colorscheme catppuccin")
-      if not ok then
-        vim.notify("Failed to load colorscheme 'catppuccin'", vim.log.levels.WARN)
-      end
+
+      vim.cmd([[colorscheme catppuccin]])
     end,
   },
 }
