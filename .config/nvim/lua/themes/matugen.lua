@@ -106,13 +106,8 @@ return {
 					-- copy code hightlight
 					Visual = { bg = palette.visual },
 
-					-- Highlight code element under cursor
-					LspReferenceText = { fg = palette.fg, bg = "#3b4261", bold = true },
-					LspReferenceRead = { fg = palette.fg, bg = "#3b4261" },
-					LspReferenceWrite = { fg = palette.fg, bg = "#3b4261" },
-
 					-- More detailed nvim-cmp highlights
-					CmpItemMenu = { fg = palette.comment },
+					CmpItemMenu = { fg = palette.comment, bg = palette.bg },
 					CmpItemAbbrMatch = { fg = palette.primary, bold = true },
 					CmpItemAbbrMatchFuzzy = { fg = palette.accent },
 					CursorLine = { bg = palette.hint, fg = palette.fg, bold = true },

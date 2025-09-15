@@ -28,7 +28,7 @@ return {
 							desc = "Restore Session",
 							group = "Label",
 							action = function()
-								require("persistence").load({ last = true })
+								require("persistence").load()
 							end,
 							key = "s",
 						},

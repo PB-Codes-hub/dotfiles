@@ -13,9 +13,10 @@ return {
 				ensure_installed = {
 					"arduino_language_server",
 					"lua_ls",
-					"pylsp",
+					--"pylsp",
 					"ruff",
 					"cssls",
+					"pyright",
 					"cssmodules_ls",
 					"html",
 					"ts_ls",
@@ -46,6 +47,20 @@ return {
 			lspconfig.ts_ls.setup({})
 			lspconfig.ruff.setup({})
 
+			lspconfig.pyright.setup({
+				settings = {
+					python = {
+						analysis = {
+							typeCheckingMode = "basic", -- basic type checking
+							autoSearchPaths = true, -- find local imports automatically
+							useLibraryCodeForTypes = true, -- use types from installed libraries
+							diagnosticMode = "workspace", -- check whole workspace
+							reportOptionalMemberAccess = false, -- ignore attribute-of-None warnings
+							reportUnknownMemberType = false, -- ignore unknown dynamic attributes
+						},
+					},
+				},
+			})
 			require("lspconfig").clangd.setup({})
 			lspconfig.gopls.setup({
 				cmd = { "gopls" },
