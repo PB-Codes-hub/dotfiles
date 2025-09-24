@@ -36,3 +36,12 @@ vim.opt.formatoptions:append({ "r" })
 vim.opt.guicursor = ""
 vim.opt.clipboard = "unnamedplus"
 vim.opt.modifiable = true -- This is buffer-local; better in autocmd if needed
+
+vim.opt.undofile = true
+vim.opt.undodir = vim.fn.stdpath("state") .. "/undo"
+
+-- LSP Server to use for Python.
+-- Set to "basedpyright" to use basedpyright instead of pyright.
+vim.g.lazyvim_python_lsp = "pyright"
+-- Set to "ruff_lsp" to use the old LSP implementation version.
+vim.g.lazyvim_python_ruff = "ruff"

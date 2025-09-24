@@ -3,7 +3,7 @@ return {
 	event = "BufReadPre",
 	opts = {
 		dir = vim.fn.stdpath("state") .. "/sessions/", -- where to save sessions
-		options = { "buffers", "curdir", "tabpages", "winsize" }, -- what to store
+		options = { "buffers", "curdir", "tabpages", "winsize", "globals" }, -- what to store
 	},
 	keys = {
 		{

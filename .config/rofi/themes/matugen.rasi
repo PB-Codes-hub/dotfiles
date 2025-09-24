@@ -16,38 +16,38 @@ configuration {
 
 /*****----- Color Palette -----*****/
 * {
-    text-color:                  #dee3e6;
-    background-color:            #0f1417;
-    lightbg:                     #171c1f;
+    text-color:                  #e7e2d5;
+    background-color:            #14140c;
+    lightbg:                     #1d1c14;
 
-    red:                         #ffb2b9;
-    green:                       #95d5a7;
+    red:                         #ffb595;
+    green:                       #b7d085;
     blue:                        #afc6ff;
     orange:                      #e9c16c;
-    gold:                        #cbcb77;
+    gold:                        #d7c870;
 
-    black-foreground:            #0a0f11;
+    black-foreground:            #0f0e07;
 
-    selected-normal-foreground:  #0f1417;
-    normal-foreground:           #dee3e6;
-    alternate-normal-background: #0f1417;
-    selected-urgent-foreground:  #0f1417;
+    selected-normal-foreground:  #14140c;
+    normal-foreground:           #e7e2d5;
+    alternate-normal-background: #14140c;
+    selected-urgent-foreground:  #14140c;
     urgent-foreground:           #690005;
-    alternate-urgent-background: #353a3d;
-    active-foreground:           #003545;
-    selected-active-foreground:  #1e333c;
-    alternate-normal-foreground: #c0c8cc;
-    alternate-active-background: #354a53;
-    borderColor:                 #cbcb77;
-    normal-background:           #0f1417;
-    selected-normal-background:  #8ad0ee;
+    alternate-urgent-background: #3b3930;
+    active-foreground:           #353100;
+    selected-active-foreground:  #333117;
+    alternate-normal-foreground: #cbc7b5;
+    alternate-active-background: #4a482c;
+    borderColor:                 #d7c870;
+    normal-background:           #14140c;
+    selected-normal-background:  #d1c973;
     separatorcolor:              #e9c16c;
     spacing:                     2;
-    urgent-background:           #ffb2b9;
+    urgent-background:           #ffb595;
     alternate-urgent-foreground: #ffdad6;
     selected-urgent-background:  #93000a;
-    alternate-active-foreground: #cfe6f2;
-    selected-active-background:  #b4cad5;
+    alternate-active-foreground: #e9e4be;
+    selected-active-background:  #ccc8a3;
     active-background:           #e9c16c;
     font: "JetBrains Mono Nerd Font 14";
 }

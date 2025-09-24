@@ -13,20 +13,16 @@ return {
 				ensure_installed = {
 					"arduino_language_server",
 					"lua_ls",
-					--"pylsp",
 					"ruff",
 					"cssls",
 					"pyright",
 					"cssmodules_ls",
 					"html",
 					"ts_ls",
-					"astro",
-					"tailwindcss",
 					"jsonls",
-					"quick_lint_js",
-					-- "harper_ls",
-					"ast_grep",
 					"gopls",
+					"clangd",
+					"rust_analyzer",
 				},
 			})
 		end,
@@ -34,38 +30,75 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			local lspconfig = require("lspconfig")
+			require("lspconfig") -- Load default configurations
+			-- Define diagnostic icons (these will show in the sign column)
+			local signs = {
+				Error = "󰅚 ",
+				Warn = "󰀪 ",
+				Hint = "󰌶 ",
+				Info = " ",
+			}
 
-			-- Setup each language server
-			lspconfig.lua_ls.setup({})
-			lspconfig.pylsp.setup({})
-			lspconfig.cssls.setup({})
-			lspconfig.jsonls.setup({})
-			lspconfig.quick_lint_js.setup({})
-			lspconfig.cssmodules_ls.setup({})
-			lspconfig.html.setup({})
-			lspconfig.ts_ls.setup({})
-			lspconfig.ruff.setup({})
+			for type, icon in pairs(signs) do
+				local hl = "DiagnosticSign" .. type
+				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+			end
 
-			lspconfig.pyright.setup({
+			-- tweak diagnostic display behavior
+			vim.diagnostic.config({
+				virtual_text = false, -- disable inline messages (keep gutter clean)
+				signs = true, -- ensure signs are shown
+				underline = true,
+				update_in_insert = false,
+				severity_sort = true,
+			})
+
+			local util = require("lspconfig.util")
+
+			local on_attach_no_format = function(client, bufnr)
+				-- Disable LSP formatting
+				client.server_capabilities.documentFormattingProvider = false
+				client.server_capabilities.documentRangeFormattingProvider = false
+				client.server_capabilities.diagnosticProvider = true
+			end
+
+			vim.lsp.config("pyright", {
+				on_attach = on_attach_no_format,
 				settings = {
 					python = {
 						analysis = {
-							typeCheckingMode = "basic", -- basic type checking
-							autoSearchPaths = true, -- find local imports automatically
-							useLibraryCodeForTypes = true, -- use types from installed libraries
-							diagnosticMode = "workspace", -- check whole workspace
-							reportOptionalMemberAccess = false, -- ignore attribute-of-None warnings
-							reportUnknownMemberType = false, -- ignore unknown dynamic attributes
+							diagnosticMode = "off", -- disables all diagnostics
+							autoImportCompletions = true, -- get those import suggestions
+							typeCheckingMode = "off", -- completely disable type checking
+							autoSearchPaths = true,
+							useLibraryCodeForTypes = true,
 						},
 					},
 				},
 			})
-			require("lspconfig").clangd.setup({})
-			lspconfig.gopls.setup({
+
+			vim.lsp.config("ruff", {
+				on_attach = function(client, bufnr)
+					-- Disable formatting for Ruff too
+					client.server_capabilities.documentFormattingProvider = false
+					client.server_capabilities.documentRangeFormattingProvider = false
+				end,
+				init_options = {
+					settings = {
+						lineLength = 120,
+						ignore = { "E501" },
+						-- disable spell checking / notes
+						select = {}, -- empty = disable all extra notes? (depends on ruff version)
+						extendSelect = {},
+						extendIgnore = { "NPI" },
+					},
+				},
+			})
+
+			vim.lsp.config("gopls", {
 				cmd = { "gopls" },
 				filetypes = { "go", "gomod", "gowork", "gotmpl" },
-				root_dir = require("lspconfig.util").root_pattern("go.work", "go.mod", ".git"),
+				root_dir = util.root_pattern("go.work", "go.mod", ".git"),
 				settings = {
 					gopls = {
 						analyses = {
@@ -78,10 +111,9 @@ return {
 				},
 			})
 
-			-- lspconfig.harper_ls.setup({})
-			lspconfig.rust_analyzer.setup({
+			vim.lsp.config("rust_analyzer", {
 				settings = {
-					["rust_analyzer"] = {
+					["rust-analyzer"] = {
 						cargo = {
 							loadOutDirsFromCheck = true,
 							allFeatures = true,
@@ -92,12 +124,28 @@ return {
 					},
 				},
 			})
-			lspconfig.ast_grep.setup({})
-			lspconfig.astro.setup({})
-			lspconfig.tailwindcss.setup({})
+
+			vim.lsp.config("clangd", {
+				cmd = {
+					"clangd",
+					"--completion-style=detailed", -- completions without auto-inserted snippets
+					"--header-insertion=never", -- don't auto add includes
+					"--function-arg-placeholders=false", -- disables auto placeholders in functions
+				},
+				capabilities = vim.lsp.protocol.make_client_capabilities({
+					textDocument = {
+						foldingRange = false, -- Disable client request for folding ranges from clangd
+					},
+				}),
+				on_attach = function(client, bufnr)
+					-- Disable formatting if using an external tool
+					client.server_capabilities.documentFormattingProvider = false
+					client.server_capabilities.documentRangeFormattingProvider = false
+				end,
+			})
 
 			-- Arduino LSP Config
-			lspconfig.arduino_language_server.setup({
+			vim.lsp.config("arduino_language_server", {
 				cmd = {
 					"arduino-language-server",
 					"-cli",
@@ -111,7 +159,7 @@ return {
 				},
 				filetypes = { "arduino", "ino" },
 				root_dir = function(fname)
-					return lspconfig.util.root_pattern("sketch.yaml", ".git")(fname) or vim.fn.getcwd()
+					return util.root_pattern("sketch.yaml", ".git")(fname) or vim.fn.getcwd()
 				end,
 			})
 		end,

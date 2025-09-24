@@ -94,37 +94,53 @@ return {
 					transparent = true,
 				},
 			},
-
-			custom_highlights = function(colors)
-				return {
-					Comment = { fg = colors.flamingo },
-					TabLineSel = { bg = colors.pink },
-					CmpBorder = { fg = colors.surface2 },
-					-- Highlight curly braces and parentheses
-					["@punctuation.bracket"] = { fg = palette.constant, bold = true },
-
-					-- copy code hightlight
-					Visual = { bg = palette.visual },
-
-					-- More detailed nvim-cmp highlights
-					CmpItemMenu = { fg = palette.comment, bg = palette.bg },
-					CmpItemAbbrMatch = { fg = palette.primary, bold = true },
-					CmpItemAbbrMatchFuzzy = { fg = palette.accent },
-					CursorLine = { bg = palette.hint, fg = palette.fg, bold = true },
-				}
-			end,
 		},
 
 		config = function(_, opts)
-			-- Setup plugin
+			-- setup plugin
 			require("catppuccin").setup(opts)
 
-			-- Alias for LazyVim compatibility with bufferline
+			-- alias for LazyVim compatibility with bufferline
 			local bufferline_int = require("catppuccin.groups.integrations.bufferline")
 			bufferline_int.get = bufferline_int.get_theme
 
-			-- Apply colorscheme safely
-			vim.cmd([[colorscheme catppuccin]])
+			-- safely apply colorscheme
+			local ok, _ = pcall(vim.cmd, "colorscheme catppuccin")
+			if not ok then
+				vim.o.termguicolors = true
+				vim.notify("Failed to load colorscheme 'catppuccin'", vim.log.levels.WARN)
+			end
+
+			-- === Custom Highlights ===
+			local cp = require("catppuccin.palettes").get_palette(opts.flavour)
+
+			-- Semantic Highlights
+			vim.api.nvim_set_hl(0, "Comment", { fg = palette.comment, italic = true })
+			vim.api.nvim_set_hl(0, "Keyword", { fg = palette.keyword, bold = true })
+			vim.api.nvim_set_hl(0, "Function", { fg = palette.func })
+			vim.api.nvim_set_hl(0, "Variable", { fg = palette.fg })
+			vim.api.nvim_set_hl(0, "String", { fg = palette.string })
+			vim.api.nvim_set_hl(0, "Constant", { fg = palette.constant })
+			vim.api.nvim_set_hl(0, "Number", { fg = palette.number })
+			vim.api.nvim_set_hl(0, "Type", { fg = palette.type })
+			vim.api.nvim_set_hl(0, "Operator", { fg = palette.operator })
+
+			-- LSP + CMP Popups
+			vim.api.nvim_set_hl(0, "Pmenu", { bg = palette.hint, fg = palette.fg })
+			vim.api.nvim_set_hl(0, "PmenuSel", { bg = palette.accent, fg = palette.fg, bold = true })
+			vim.api.nvim_set_hl(0, "NormalFloat", { bg = palette.bg })
+			vim.api.nvim_set_hl(0, "FloatBorder", { bg = palette.bg, fg = palette.accent })
+
+			-- Diagnostics
+			vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = true, sp = palette.error })
+			vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = true, sp = palette.warning })
+			vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = true, sp = palette.info })
+			vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = true, sp = palette.hint })
+
+			-- Visual / Cursor
+			vim.api.nvim_set_hl(0, "Visual", { bg = palette.visual })
+			vim.api.nvim_set_hl(0, "CursorLine", { bg = palette.cursorln })
+			vim.api.nvim_set_hl(0, "Cursor", { fg = palette.cursor })
 		end,
 	},
 }
